@@ -3,4 +3,77 @@
 {% block title %}forum{% endblock%}
 {% block content %} 
 
+<form method="POST" enctype="multipart/form-data" class="m-10 p-8 bg-white rounded-lg shadow-lg">
+    {% csrf_token %}
+    <h1 class="block text-gray-700 font-bold mb-2 text-4xl">Create new post</h1>
+    <div class="mb-6">
+        <label for="username" class="block text-gray-700 font-bold mb-2">Username:</label>
+        {{ form.user_id.username }}
+    </div>
+    <div class="mb-6">
+        <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
+        {{ form.name }}
+    </div>
+    <div class="mb-6">
+        <label for="image" class="block text-gray-700 font-bold mb-2">Image:</label>
+        {{ form.image }}
+    </div>
+    <div class="mb-6">
+        <label for="date" class="block text-gray-700 font-bold mb-2">Date:</label>
+        {{ form.date }}
+    </div>
+    <div class="mb-6">
+        <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
+        {{ form.description }}
+    </div>
+    <div class="flex">
+        <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2">North:</label>
+            <ul class="list-disc ml-6">
+                <li>♣{{ form.n_spades }}</li>
+                <li>♦{{ form.n_hearts }}</li>
+                <li>♥{{ form.n_diamonds }}</li>
+                <li>♠{{ form.n_clubs }}</li>
+            </ul>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2">West:</label>
+            <ul class="list-disc ml-6">
+                <li>♣{{ form.w_spades }}</li>
+                <li>♦{{ form.w_hearts }}</li>
+                <li>♥{{ form.w_diamonds }}</li>
+                <li>♠{{ form.w_clubs }}</li>
+            </ul>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2">East:</label>
+            <ul class="list-disc ml-6">
+                <li>♣{{ form.e_spades }}</li>
+                <li>♦{{ form.e_hearts }}</li>
+                <li>♥{{ form.e_diamonds }}</li>
+                <li>♠{{ form.e_clubs }}</li>
+            </ul>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2">South:</label>
+            <ul class="list-disc ml-6">
+                <li>♣{{ form.s_spades }}</li>
+                <li>♦{{ form.s_hearts }}</li>
+                <li>♥{{ form.s_diamonds }}</li>
+                <li>♠{{ form.s_clubs }}</li>
+            </ul>
+        </div>
+    </div>
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Submit</button>
+</form>
+<style>
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    textarea,
+    select {
+        background-color: #f3f4f6;
+        margin-top: 0.5rem;
+    }
+</style>
 {% endblock %}

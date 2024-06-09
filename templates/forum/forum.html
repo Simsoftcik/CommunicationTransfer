@@ -17,121 +17,34 @@
         <div class="mx-auto border-b-2 border-white" style="height: 80px; width: 80%;">
             <h1 class="font-bold text-6xl text-white text-center">NEWS</h1>
         </div>
-        <div class="grid grid-cols-3 gap-16 p-10">
+        <div class="grid grid-cols-3 gap-4 p-10">
             {% for post in posts %}
             <a href="{{post.id}}">
-                <div class="border-slate-700 border-2 rounded-2xl" style="height: 500px; display: flex; flex-direction: column;">
-                    <div class="p-4 text-2xl bg-slate-200 font-oxygen font-bold rounded-t-2xl text-slate-700 border-b-4 border-slate-700" style="height: 15%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <div class="border-slate-700 border rounded-2xl overflow-hidden" style=" display: flex; flex-direction: column;">
+                    <p class=" flex flex-col items-center text-2xl bg-slate-200 font-oxygen font-bold rounded-t-2xl text-slate-700 border-b-4 border-slate-700" style="height: 15%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         {{ post.name }}
-                    </div>
+                    </p>
                     <div style="flex-grow: 1;">
-                        <div style="display: flex; flex-direction: column;">
+                        <div style="display: flex; flex-direction: column;" class="overflow-hidden">
                             {% if post.image %}
-                                <img src="{{ post.image.url }}" alt="Image unavailable">
+                                <img src="{{ post.image.url }}" alt="Image unavailable" style="height: 200px">
                             {% else %}
-                                <div class="px-auto py-10 text-8xl font-bold font-oxygen bg-slate-200 text-center" style="height: 30%; color:rgb(130, 132, 133);">?</div>
+                                <div class="px-auto py-10 text-8xl font-bold font-oxygen bg-slate-200 text-center" style="height: 200px; color:rgb(130, 132, 133);">?</div>
+                                <!-- <p style="height: 200px; text-overflow: ellipsis; ">{{ post.description }} </p> -->
                             {% endif %} 
                         </div>
-                        <div class="p-2 border-t-4 border-slate-400 bg-slate-200 " style="flex-grow: 1; ">
-                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ post.description }}</p>
+                        <div class="p-2 border-t-4 border-slate-400 bg-slate-200 overflow-hidden" style="flex-grow: 1; ">
+                            {% if not post.image %}
+                                <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ post.description }} <br></p>
+                            {% else %}
+                                br
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </a>
             {% endfor %}
         </div>
-    </div>
-
-
-
-        <div class="p-8 flex flex-col">
-        <div class="flex grid-cols-4 gap-4">
-            {% for post in posts %}
-            <a href="{{ post.id }}" class="flex flex-col container">
-                {{ post.user_id.username }}
-                {{ post.name }}
-                {% if post.image %}
-                    <img src="{{ post.image.url }}" alt="Image unavailable">
-                {% endif %}
-                {{ post.date }}
-                {{ post.description }}
-                <div class="flex flex-col items-center w-full">
-                    <ul>
-                        <li>♣{{ post.n_spades }}</li>
-                        <li>♦{{ post.n_hearts }}</li>
-                        <li>♥{{ post.n_diamonds }}</li>
-                        <li>♠{{ post.n_clubs }}</li>
-                    </ul>
-                    <div class="flex justify-between">
-                        <div>
-                            <ul>
-                                <li>♣{{ post.w_spades }}</li>
-                                <li>♦{{ post.w_hearts }}</li>
-                                <li>♥{{ post.w_diamonds }}</li>
-                                <li>♠{{ post.w_clubs }}</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <ul>
-                                <li>♣{{ post.e_spades }}</li>
-                                <li>♦{{ post.e_hearts }}</li>
-                                <li>♥{{ post.e_diamonds }}</li>
-                                <li>♠{{ post.e_clubs }}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <ul>
-                        <li>♣{{ post.s_spades }}</li>
-                        <li>♦{{ post.s_hearts }}</li>
-                        <li>♥{{ post.s_diamonds }}</li>
-                        <li>♠{{ post.s_clubs }}</li>
-                    </ul>
-                </div>
-            </a>
-        {% empty %}
-            <h2>There are no posts or they are unavailable</h2>
-        {% endfor %}
-        </div>
-        <form method="POST" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2"> 
-            {% csrf_token %}
-            {{ form.user_id.username }}
-            {{ form.name }}
-            {{ form.image }}
-            {{ form.date }}
-            {{ form.description }}
-
-            <ul>
-                <li>♣{{ form.n_spades }}</li>
-                <li>♦{{ form.n_hearts }}</li>
-                <li>♥{{ form.n_diamonds }}</li>
-                <li>♠{{ form.n_clubs }}</li>
-            </ul>
-
-            <ul>
-                <li>♣{{ form.w_spades }}</li>
-                <li>♦{{ form.w_hearts }}</li>
-                <li>♥{{ form.w_diamonds }}</li>
-                <li>♠{{ form.w_clubs }}</li>
-            </ul>
-
-            <ul>
-                <li>♣{{ form.e_spades }}</li>
-                <li>♦{{ form.e_hearts }}</li>
-                <li>♥{{ form.e_diamonds }}</li>
-                <li>♠{{ form.e_clubs }}</li>
-            </ul>
-
-            <ul>
-                <li>♣{{ form.s_spades }}</li>
-                <li>♦{{ form.s_hearts }}</li>
-                <li>♥{{ form.s_diamonds }}</li>
-                <li>♠{{ form.s_clubs }}</li>
-            </ul>
-            
-        </a>
-            <input type="submit" value="Submit comment" class="text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
-        </form>
-        <div class="w-1/2"></div>
     </div>
 </div>
 {% endblock %}
