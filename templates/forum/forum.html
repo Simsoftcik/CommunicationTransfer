@@ -19,21 +19,25 @@
         </div>
         <div class="grid grid-cols-3 gap-16 p-10">
             {% for post in posts %}
-            <div class="border-white border-2" style="height: 500px;">
-                <div>
-                    {{ post.name }}
+            <a href="{{post.id}}">
+                <div class="border-slate-700 border-2 rounded-2xl" style="height: 500px; display: flex; flex-direction: column;">
+                    <div class="p-4 text-2xl bg-slate-200 font-oxygen font-bold rounded-t-2xl text-slate-700 border-b-4 border-slate-700" style="height: 15%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        {{ post.name }}
+                    </div>
+                    <div style="flex-grow: 1;">
+                        <div style="display: flex; flex-direction: column;">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" alt="Image unavailable">
+                            {% else %}
+                                <div class="px-auto py-10 text-8xl font-bold font-oxygen bg-slate-200 text-center" style="height: 30%; color:rgb(130, 132, 133);">?</div>
+                            {% endif %} 
+                        </div>
+                        <div class="p-2 border-t-4 border-slate-400 bg-slate-200 " style="flex-grow: 1; ">
+                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ post.description }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}" alt="Image unavailable">
-                    {% else %}
-                        
-                    {% endif %} 
-                </div>
-                <div>
-                    {{ post.description }}
-                </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
     </div>
