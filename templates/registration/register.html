@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block title %} Zarejestruj się {% endblock %}
+
+{% block content %}
+<div>
+    <div class="h-60 text-white flex items-center justify-center font-oxygen font-slate-700 text-5xl font-bold">
+        <span class="w-1/2 text-center">Join us and make <span style="color:#ff4d4d">c</span>ommuni<span style="color:#ff4d4d">c</span>a<span style="color:#005ce6">t</span>ion easier <span style="color:#005ce6">t</span>oday!</span>
+    </div>
+    <div class="h-30"></div>
+    <div class="grid grid-cols-6 p-1 rounded-t-2xl" style="background-image: url('https://eidk95seyu2.exactdn.com/en/blog/wp-content/uploads/2022/07/Body-A-bridge-player-plays-a-card-from-their-hand-Why-casinos-dont-offer-online-bridge.jpg?strip=all&lossy=1&ssl=1'); background-repeat: no-repeat; background-size: cover; text-shadow: 2px 2px 8px black;">
+        <div class="col-span-2"></div>
+        <div class="col-span-2 ">
+            <form method="post" class="from-group text-black col-span-3 justify-self-center flex flex-col">
+            {% csrf_token %}
+            <div class="flex flex-col items-center px-10 py-12 bg-slate-300 bg-opacity-70 m-8  rounded-2xl border-slate-100 shadow-lg">
+                {{ form.username.label_tag }}
+                <input class="form-control shadow-lg" style="width: 100%;" id="{{ form.username.id_for_label }}" maxlength="30" name="{{ form.username.html_name }}" value="{{ form.username.value }}" type="text" placeholder="{{ form.username.label }}" /> 
+                {{ form.username.errors }}
+                <span class="m-2"></span>
+                {{ form.password1.label_tag }}
+                <input class="form-control shadow-lg" style="width: 100%;" id="{{ form.password1.id_for_label }}" maxlength="30" name="{{ form.password1.html_name }}" value="{{ form.password1.value }}" type="password" placeholder="{{ form.password1.label }}" /> 
+                {{ form.password1.errors }}
+                <span class="m-2"></span>
+                {{ form.password2.label_tag }}
+                <input class="form-control shadow-lg" style="width: 100%;" id="{{ form.password2.id_for_label }}" maxlength="30" name="{{ form.password2.html_name }}" value="{{ form.password2.value }}" type="password" placeholder="{{ form.password2.label }}" /> 
+                {{ form.password2.errors }}
+                <div class="mt-2 bg-slate-700 rounded-lg w-fit hover:bg-slate-500 hover:text-slate-100 shadow-lg ml-4">
+                    <button type="submit" class="text-lg text-slate-200 px-4 py-1 font-bold">Register</button>
+                </div>
+                <span class="text-white m-2 drop-shadow-lg">
+                Masz już konto? zaloguj się
+                <a class="text-cyan-400" href="/accounts/login">tutaj</a>
+            </span>
+            </div>
+            </form>
+        </div>
+        <div class="col-span-2"></div>
+    </div>
+<div/>
+{% endblock %}

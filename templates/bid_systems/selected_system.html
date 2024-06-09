@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Bid systems{% endblock%}
+{% block content %} 
+
+<div class="dark:text-white m-8 bg-slate-100 rounded-2xl dark:bg-slate-900 dark:border border-slate-700">
+    <div class="p-2 h-auto bg-slate-200 dark:bg-dark_slate_2 rounded-t-2xl pb-1 flex dark:border-b border-slate-700">
+        <span class="text-4xl font-oxygen align-middle text-slate-700 dark:border-slate-400 dark:text-slate-200 px-2 transition duration-500 ease-in-out hover:brightness-110 font-bold">{{ system.name }}</span>
+    </div>
+    <div class="p-8 md:flex">
+        <div class="mx-3 w-full flex flex-col gap-4"> 
+            <p class="mx-3 italic font-thin text-sm">{{ system.description }}</p>
+
+            {% for category, situation_data in category_data.items %}
+            <div class="my-10 p-1 border-2 rounded-lg border-green-800">
+                <div class="p-1 divide-y border-2 roudned-xl border-green-800" style="border-style:dashed;">
+                    <div class="p-1 border-2 rounded-lg border-green-800 align-center">
+
+                        <div class="mb-7 p-4 text-5xl font-bold text-center">{{ category.name }}</div>
+                            
+                            {% for situation, bids in situation_data.items %}
+                                <div class="w-1/4 italic my-10 ml-10 pb-2 border-b border-gray-300 text-bold text-xl">{{ situation.name }}</div>
+
+                                
+
+                                    <!-- <div class="m-4 flex justify-center items-center h-24 ">
+
+                                        <div class="flex items-center justify-center w-1/4 h-90p text-center text-bold text-3xl border-r-2 rounded-sm border-slate-400 hover:bg-slate-200 hover:text-slate-600 transition duration-200 ease-in-out">
+                                            2♣<br />acol
+                                        </div>
+                                    
+                                        
+                                        <div class="flex items-center justify-center w-1/4 h-4/5 mx-1 my-2  border-r-2 border-slate-400 rounded-sm transition duration-300 hover:bg-slate-200 hover:text-slate-600 text-center transition duration-200 ease-in-out">
+                                            Typ zagrywki
+                                        </div>
+                                    
+                                        <div class=" flex items-center justify-center w-1/4 h-4/5 mx-1 my-2  border-r-2 border-slate-400 rounded-sm transition duration-300 hover:bg-slate-200 hover:text-slate-600 text-center transition duration-200 ease-in-out">
+                                            Siła
+                                        </div>
+                                    
+                                        <div class="flex items-center justify-center w-1/2 h-4/5 mx-1 my-2  border-r-2 border-slate-400 rounded-sm transition duration-300 hover:bg-slate-200 hover:text-slate-600 text-center transition duration-200 ease-in-out">
+                                            Opis
+                                        </div>
+                                    
+                                    
+                                        <div class="flex items-center justify-center w-1/4 h-4/5 mx-1 my-2  border-slate-400 rounded-sm transition duration-300 hover:bg-slate-200 hover:text-slate-600 text-center transition duration-200 ease-in-out">
+                                            
+                                            <div class="font-bold text-3xl text-blue-500">ALERT</div>
+
+                                        </div>
+                                    
+                                    
+                                    </div> -->
+                            
+                                {% for bid in bids %}
+
+
+                                    <div class="m-4 flex justify-center items-center h-24 ">
+
+                                        <div class="flex items-center justify-center w-1/4 h-90p text-center text-bold text-3xl border-r-2 rounded-sm border-slate-400 hover:bg-slate-200 hover:text-slate-600 transition duration-200 ease-in-out">
+                                            {{ bid.symbol }}<br />{{ bid.name }}
+                                        </div>
+                                    
+                                        
+                                        <div class="flex items-center justify-center w-1/4 h-4/5 mx-1 my-2  border-r-2 border-slate-400 rounded-sm transition duration-300 hover:bg-slate-200 hover:text-slate-600 text-center transition duration-200 ease-in-out">
+                                            {{ bid.forcing_type }}
+                                        </div>
+                                    
+                                        <div class=" flex items-center justify-center w-1/4 h-4/5 mx-1 my-2  border-r-2 border-slate-400 rounded-sm transition duration-300 hover:bg-slate-200 hover:text-slate-600 text-center transition duration-200 ease-in-out">
+                                            {{ bid.strength }}
+                                        </div>
+                                    
+                                        <div class="flex items-center justify-center w-1/2 h-4/5 mx-1 my-2  border-r-2 border-slate-400 rounded-sm transition duration-300 hover:bg-slate-200 hover:text-slate-600 text-center transition duration-200 ease-in-out">
+                                            {{ bid.description }}
+                                        </div>
+                                    
+                                    
+                                        <div class="flex items-center justify-center w-1/4 h-4/5 mx-1 my-2  border-slate-400 rounded-sm transition duration-300 hover:bg-slate-200 hover:text-slate-600 text-center transition duration-200 ease-in-out">
+                                            {% if bid.is_alerted %}
+                                                <div class="font-bold text-2xl text-blue-500">ALERT</div>
+                                            {% else %}
+                                                <div class="font-bold text-2xl text-green-500">NATURAL</div>
+                                            {% endif %}
+                                        </div>
+                                    
+                                    
+                                    </div>
+
+                                {% endfor %}
+
+                            {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

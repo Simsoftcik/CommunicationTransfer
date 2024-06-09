@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Bid systems{% endblock%}
+{% block content %} 
+
+<div class="dark:text-white m-8 bg-slate-100 rounded-2xl dark:bg-slate-900 dark:border border-slate-700">
+    <div class="h-auto bg-slate-200 dark:bg-dark_slate_2 rounded-t-2xl pb-1 flex dark:border-b border-slate-700">
+        <span class="text-4xl font-oxygen align-middle text-slate-700 dark:border-slate-400 text-slate-200 px-2 transition duration-500 ease-in-out hover:brightness-110 font-bold">Create new category</span>
+    </div>
+    <div class="p-8 md:flex">
+        <form method="POST" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2"> 
+            {% csrf_token %}
+            {{ category_form.as_p }}
+            <input type="submit" value="Add" class="text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
+            {% for category in categories %}
+                <h2>{{ category.name }}</h2>
+            {% endfor %}
+        </form>
+        <div class="w-1/2"></div>
+    </div>
+</div>
+
+<div class="dark:text-white m-8 bg-slate-100 rounded-2xl dark:bg-slate-900 dark:border border-slate-700">
+    <div class="h-auto bg-slate-200 dark:bg-dark_slate_2 rounded-t-2xl pb-1 flex dark:border-b border-slate-700">
+        <span class="text-4xl font-oxygen align-middle text-slate-700 dark:border-slate-400 text-slate-200 px-2 transition duration-500 ease-in-out hover:brightness-110 font-bold">Add new situation</span>
+    </div>
+    <div class="p-8 md:flex">
+        <form method="POST" action="" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2"> 
+            {% csrf_token %}
+            {{ situation_form.as_p }}
+            <input type="submit" value="Add" class="text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
+        </form>
+        <div class="w-1/2"></div>
+    </div>
+</div>
+
+<div class="dark:text-white m-8 bg-slate-100 rounded-2xl dark:bg-slate-900 dark:border border-slate-700">
+    <div class="h-auto bg-slate-200 dark:bg-dark_slate_2 rounded-t-2xl pb-1 flex dark:border-b border-slate-700">
+        <span class="text-4xl font-oxygen align-middle text-slate-700 dark:border-slate-400 text-slate-200 px-2 transition duration-500 ease-in-out hover:brightness-110 font-bold">Add new bid</span>
+    </div>
+    <div class="p-8 md:flex">
+        <form method="POST" action="" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2"> 
+            {% csrf_token %}
+            {{ bid_form.as_p }}
+            <input type="submit" value="Add" class="text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
+        </form>
+        <div class="w-1/2"></div>
+    </div>
+</div>
+
+{% endblock %}

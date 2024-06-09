@@ -1,0 +1,225 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block scripts %}
+    <script>
+
+    </script>
+{% endblock scripts %}
+{% block title %}Practice tool{% endblock%}
+{% block content %} 
+
+<div class="dark:text-white m-8 bg-slate-100 rounded-2xl dark:bg-slate-900 dark:border border-slate-700">
+    <div class="h-auto bg-slate-200 dark:bg-dark_slate_2 rounded-t-2xl pb-1 flex dark:border-b border-slate-700">
+        <span class="text-4xl font-oxygen align-middle dark:text-slate-700 dark:border-slate-400 dark:text-slate-200 px-2 transition duration-500 ease-in-out hover:brightness-110 font-bold">Arena</span>
+    </div>
+    <div class="p-8 md:flex">
+        <div class="mx-auto border-2 border-slate-700 rounded-2xl" style="width: 800px; min-height: 800px;">
+            
+                <h1 class="mx-auto my-10 w-1/2 text-center text-4xl font-bold">{{ title }}</h1>
+                
+                <div class="mx-auto my-10 rounded-xl bg-slate-700" style="min-height: 220px; width: 440px; -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                    <div class="grid grid-cols-4 rounded-t-xl border-b-2 border-slate-800" style=" min-height: 40px;">
+
+                        <div class="p-2 italic text-xl font-bold text-center rounded-tl-lg border-r-2 border-slate-800" style="background-color: {{ vulnerability.0 }};">E</div> 
+                        <div class="p-2 italic text-xl font-bold text-center border-r-2 border-slate-800" style="background-color: {{ vulnerability.1 }};">S</div>
+                        <div class="p-2 italic text-xl font-bold text-center border-r-2 border-slate-800" style="background-color: {{ vulnerability.2 }};">W</div>
+                        <div class="p-2 italic text-xl font-bold text-center rounded-tr-lg" style="background-color: {{ vulnerability.3 }};">N</div>
+                    </div>
+
+                    <div class="grid grid-cols-4">
+                        {% for bid_element in bidding %}
+                            {% if bid_element == ' ' %}
+                                <div></div>
+                            {% endif %}
+                            
+                            {% if bid_element == 'pass' %}
+                                {% with text_color='#ffffff' background_color='#009933' border_color='#00cc44'%}
+                                    <div class="p-2 mx-auto my-3 border-4 rounded-2xl font-bold text-3xl text-center" 
+                                    style="width: 60px; height: 60px; color: {{text_color}}; background-color: {{background_color}}; border-color: {{border_color}};">
+                                        P
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+
+                            {% if bid_element == 'user' %}
+                                {% with text_color='#ffffff' background_color='#669999' border_color='#85adad'%}
+                                    <div class="p-2 mx-auto my-3 border-4 rounded-2xl font-bold text-3xl text-center" 
+                                    style="width: 60px; height: 60px; color: {{text_color}}; background-color: {{background_color}}; border-color: {{border_color}};">
+                                        ?
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+                            
+                            {% if bid_element.1 == '♣' %}
+                                {% with text_color='#009933' background_color='#66ff99' border_color='#009933'%}
+                                    <div class="p-2 mx-auto my-3 border-4 rounded-2xl font-bold text-3xl text-center" 
+                                    style="width: 60px; height: 60px; color: {{text_color}}; background-color: {{background_color}}; border-color: {{border_color}};">
+                                        {{ bid_element }}
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+                            
+                            {% if bid_element.1 == '♦' %}
+                                {% with text_color='#ff9900' background_color='#ffd699' border_color='#ff9900'%}
+                                    <div class="p-2 mx-auto my-3 border-4 rounded-2xl font-bold text-3xl text-center" 
+                                    style="width: 60px; height: 60px; color: {{text_color}}; background-color: {{background_color}}; border-color: {{border_color}};">
+                                        {{ bid_element }}
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+                            
+                            {% if bid_element.1 == '♥' %}
+                                {% with text_color='#ff4d4d' background_color='#ffb3b3' border_color='#ff4d4d'%}
+                                    <div class="p-2 mx-auto my-3 border-4 rounded-2xl font-bold text-3xl text-center" 
+                                    style="width: 60px; height: 60px; color: {{text_color}}; background-color: {{background_color}}; border-color: {{border_color}};">
+                                        {{ bid_element }}
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+                            
+                            {% if bid_element.1 == '♠' %}
+                                {% with text_color='#005ce6' background_color='#99c2ff' border_color='#005ce6'%}
+                                    <div class="p-2 mx-auto my-3 border-4 rounded-2xl font-bold text-3xl text-center" 
+                                    style="width: 60px; height: 60px; color: {{text_color}}; background-color: {{background_color}}; border-color: {{border_color}};">
+                                        {{ bid_element }}
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+                            
+                            {% if bid_element.1 == 'N' %}
+                                {% with text_color='#000000' background_color='#b3b3b3' border_color='#000000'%}
+                                    <div class="py-2 p-r-4 mx-auto my-3 border-4 rounded-xl font-bold text-2xl text-center" 
+                                    style="width: 60px; height: 60px; color: {{text_color}}; background-color: {{background_color}}; border-color: {{border_color}};">
+                                        {{ bid_element }}
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+                            
+                            {% if bid_element == 'x' %}
+                                {% with text_color='#ffffff' background_color='#ff0000' border_color=' #660000'%}    
+                                    <div class="mx-auto my-3 border-4 rounded-2xl font-bold text-3xl text-center" 
+                                    style="width: 60px; height: 60px; color: {{text_color}}; background-color: {{background_color}}; border-color: {{border_color}}; padding-top: 3px;">
+                                        x
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+                            
+                            {% if bid_element == 'xx' %}
+                                {% with text_color='#ffffff' background_color='#0000ff' border_color='#000066'%}
+                                    <div class="mx-auto my-3 border-4 rounded-2xl font-bold text-3xl text-center" 
+                                    style="width: 60px; height: 60px; color: {{text_color}}; background-color: {{background_color}}; border-color: {{border_color}}; padding-top: 3px;">
+                                        xx
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+                        
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- <form method="POST" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2" id="openingForm">  -->
+                <div>
+                    <button type="submit" id="reload" class="mx-8 my-4 text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
+                        <a href="{% url 'generate_new_hand_id' %}">Reload hand</a>
+                    </button>
+                    <div class="mx-6 my-2">
+                    {% if form_sent == False%}
+                        <div class="">
+                            <form method="POST" enctype="multipart/form-data" class="w-fit grow flex flex-col gap-2" id="openingForm"> 
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" value="Confirm" class="my-10 text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
+                            </form>
+                        </div>
+                    {% else %}
+                        <div>    
+                            <form method="POST" enctype="multipart/form-data" class="w-fit grow flex flex-col gap-2" id="openingForm"> 
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" value="Confirm" class="text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
+                            </form>
+                            <br>
+                            <div class="mx-4">
+                                {% if opened_correctly %}
+                                    <p class="text-green-400 font-bold">{{ message.0 }}</p>
+                                {% else %}
+                                    {% for message_tuple in message %}
+                                        <p class="text-red-400 font-bold">{{ message_tuple.0 }}</p>
+                                        <p class="text-red-400">{{ message_tuple.1 }}</p>
+                                        <br/>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+   
+            <div class="relative mx-auto my-10" style="width: 560px; height: 210px;">
+                {% for card_element in cards %}
+                    {{card_element}}
+                    {% if card_element.1.1 == '♣'%}
+                        {% with text_color='#009933' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♦'%}
+                        {% with text_color='#ff9900' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♥'%}
+                        {% with text_color='#ff4d4d' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♠'%}
+                        {% with text_color='#005ce6' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

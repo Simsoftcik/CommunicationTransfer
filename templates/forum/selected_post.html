@@ -1,0 +1,252 @@
+<style>
+    .post_bidding_containter {
+        width: 1000px;
+        height: 1000px;
+        margin: auto;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: auto 560px auto;
+    }
+
+    .first_col, .second_col, .third_col {
+        display: grid;
+        grid-template-rows: auto 560px auto;
+    }
+
+</style>
+
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Selected post{% endblock%}
+{% block content %}
+
+<div class=" m-8 bg-slate-100 rounded-2xl dark:bg-slate-900 dark:border border-slate-700">
+    <div class="h-auto bg-slate-200 dark:bg-dark_slate_2 rounded-t-2xl pb-1 flex dark:border-b border-slate-700">
+        <span class="text-4xl font-oxygen align-middle text-slate-700 dark:border-slate-400 text-slate-200 px-2 transition duration-500 ease-in-out hover:brightness-110 font-bold">{{ selected_post.name }}</span>
+    </div>
+    <div class="post_bidding_containter">
+        <div class="first_col">
+            <div></div>
+            <div class="relative">
+                {% for card_element in cards.w %}
+                    {% if card_element.1.1 == '♣'%}
+                        {% with text_color='#009933' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; top: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♦'%}
+                        {% with text_color='#ff9900' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; top: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♥'%}
+                        {% with text_color='#ff4d4d' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; top: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♠'%}
+                        {% with text_color='#005ce6' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div></div>
+        </div>
+        <div class="second_col">
+            <div class="relative">
+                {% for card_element in cards.n %}
+                    {% if card_element.1.1 == '♣'%}
+                        {% with text_color='#009933' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 190px; width: 119px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 190px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 190px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♦'%}
+                        {% with text_color='#ff9900' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♥'%}
+                        {% with text_color='#ff4d4d' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♠'%}
+                        {% with text_color='#005ce6' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div></div>
+            <div class="relative">
+                {% for card_element in cards.s %}
+                    {% if card_element.1.1 == '♣'%}
+                        {% with text_color='#009933' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♦'%}
+                        {% with text_color='#ff9900' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♥'%}
+                        {% with text_color='#ff4d4d' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                    {% if card_element.1.1 == '♠'%}
+                        {% with text_color='#005ce6' %}    
+
+                            <div class="absolute flex rounded-lg border-slate-500" style="border-width: 1px; height: 210px; width: 132px; color: {{text_color}}; background-color: antiquewhite; left: calc(36px * {{ card_element.0 }}); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                                <div class="p-1 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}} 
+                                </div>
+                                <div class="" style="width: 72%; "></div>
+                                <div class="p-1 rotate-180 text-l font-bold text-center rounded-l-lg" style="width: 14%; height: 210px; ">
+                                    {{card_element.1.0}}</br> {{card_element.1.1}}
+                                </div>
+                            </div>
+                    
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="third_col">
+            <div></div>
+            <div class="east"></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="p-8 md:flex">
+        <form method="POST" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2"> 
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Post" class="text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
+        </form>
+        {% for comment in comments %}
+            <div>
+                {{ comment.user_id.username }}
+                {{ comment.date }}
+                {{ comment.content }}
+            </div>
+        {% empty %}
+            <h2>Be first to comment this post</h2>
+        {% endfor %}
+        <div class="w-1/2"></div>
+    </div>
+</div>
+
+{% endblock %}

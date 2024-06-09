@@ -1,0 +1,133 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}forum{% endblock%}
+{% block content %} 
+<div class=" m-8 bg-slate-100 rounded-2xl dark:bg-slate-900 dark:border border-slate-700">
+    <div class="h-auto bg-slate-200 dark:bg-dark_slate_2 rounded-t-2xl pb-1 flex dark:border-b border-slate-700">
+        <span class="text-4xl font-oxygen align-middle text-slate-700 dark:border-slate-400 text-slate-200 px-2 transition duration-500 ease-in-out hover:brightness-110 font-bold">Forum</span>
+    </div>
+    <div class="relative flex items-center" style="height: 100px;">
+        <a class="flex items-center justify-center w-1/10 absolute right-4 p-2 bg-slate-200" style="height: 50%;" href="/forum/new_post">
+            <div>
+                Create new post
+            </div>
+        </a>
+    </div>
+    <div class="m-10" style="min-height: 1000px;">
+        <div class="mx-auto border-b-2 border-white" style="height: 80px; width: 80%;">
+            <h1 class="font-bold text-6xl text-white text-center">NEWS</h1>
+        </div>
+        <div class="grid grid-cols-3 gap-16 p-10">
+            {% for post in posts %}
+            <div class="border-white border-2" style="height: 500px;">
+                <div>
+                    {{ post.name }}
+                </div>
+                <div>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="Image unavailable">
+                    {% else %}
+                        
+                    {% endif %} 
+                </div>
+                <div>
+                    {{ post.description }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+        <div class="p-8 flex flex-col">
+        <div class="flex grid-cols-4 gap-4">
+            {% for post in posts %}
+            <a href="{{ post.id }}" class="flex flex-col container">
+                {{ post.user_id.username }}
+                {{ post.name }}
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="Image unavailable">
+                {% endif %}
+                {{ post.date }}
+                {{ post.description }}
+                <div class="flex flex-col items-center w-full">
+                    <ul>
+                        <li>♣{{ post.n_spades }}</li>
+                        <li>♦{{ post.n_hearts }}</li>
+                        <li>♥{{ post.n_diamonds }}</li>
+                        <li>♠{{ post.n_clubs }}</li>
+                    </ul>
+                    <div class="flex justify-between">
+                        <div>
+                            <ul>
+                                <li>♣{{ post.w_spades }}</li>
+                                <li>♦{{ post.w_hearts }}</li>
+                                <li>♥{{ post.w_diamonds }}</li>
+                                <li>♠{{ post.w_clubs }}</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>♣{{ post.e_spades }}</li>
+                                <li>♦{{ post.e_hearts }}</li>
+                                <li>♥{{ post.e_diamonds }}</li>
+                                <li>♠{{ post.e_clubs }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>♣{{ post.s_spades }}</li>
+                        <li>♦{{ post.s_hearts }}</li>
+                        <li>♥{{ post.s_diamonds }}</li>
+                        <li>♠{{ post.s_clubs }}</li>
+                    </ul>
+                </div>
+            </a>
+        {% empty %}
+            <h2>There are no posts or they are unavailable</h2>
+        {% endfor %}
+        </div>
+        <form method="POST" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2"> 
+            {% csrf_token %}
+            {{ form.user_id.username }}
+            {{ form.name }}
+            {{ form.image }}
+            {{ form.date }}
+            {{ form.description }}
+
+            <ul>
+                <li>♣{{ form.n_spades }}</li>
+                <li>♦{{ form.n_hearts }}</li>
+                <li>♥{{ form.n_diamonds }}</li>
+                <li>♠{{ form.n_clubs }}</li>
+            </ul>
+
+            <ul>
+                <li>♣{{ form.w_spades }}</li>
+                <li>♦{{ form.w_hearts }}</li>
+                <li>♥{{ form.w_diamonds }}</li>
+                <li>♠{{ form.w_clubs }}</li>
+            </ul>
+
+            <ul>
+                <li>♣{{ form.e_spades }}</li>
+                <li>♦{{ form.e_hearts }}</li>
+                <li>♥{{ form.e_diamonds }}</li>
+                <li>♠{{ form.e_clubs }}</li>
+            </ul>
+
+            <ul>
+                <li>♣{{ form.s_spades }}</li>
+                <li>♦{{ form.s_hearts }}</li>
+                <li>♥{{ form.s_diamonds }}</li>
+                <li>♠{{ form.s_clubs }}</li>
+            </ul>
+            
+        </a>
+            <input type="submit" value="Submit comment" class="text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
+        </form>
+        <div class="w-1/2"></div>
+    </div>
+</div>
+{% endblock %}

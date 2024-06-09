@@ -1,0 +1,30 @@
+{% extends "index.html" %} {% block title %}Zaloguj się{% endblock %} 
+{% block content %}
+<!-- <div class="h-20"></div> -->
+<div class="h-screen grid grid-cols-6 rounded-t-2xl" style="background-image: url('https://wallpapercave.com/wp/L138LQm.jpg'); background-repeat: no-repeat; background-size: cover; text-shadow: 2px 2px 8px black;">
+    <div class="col-span-2"></div>
+    <div class="col-span-2 ">
+        <form method="post" class="from-group text-black col-span-3 justify-self-center flex flex-col">
+        {% csrf_token %} 
+        <div class="flex flex-col items-center px-10 py-12 bg-slate-300 bg-opacity-70 mx-8 mt-40  rounded-2xl border-slate-100 shadow-lg">
+            {{ form.username.label_tag }}
+            <input class="form-control shadow-lg" style="width: 100%;" id="{{ form.username.id_for_label }}" maxlength="30" name="{{ form.username.html_name }}" value="{{ form.username.value }}" type="text" placeholder="{{ form.username.label }}" /> 
+            {{ form.username.errors }}
+            <span class="m-2"></span>
+            {{ form.password.label_tag }}
+            <input class="form-control" style="width: 100%;" id="{{ form.password.id_for_label }}" maxlength="30" name="{{ form.password.html_name }}" value="{{ form.password.value }}" type="password" placeholder="{{ form.password.label }}" /> 
+            {{ form.password.errors }}
+            <span class="m-2"></span>
+            <div class="bg-slate-700 rounded-lg w-fit hover:bg-slate-500 hover:text-slate-100 shadow-lg ml-4">
+                <button type="submit" class="text-lg text-slate-200 px-4 py-1 font-bold">Login</button>
+            </div>
+            </form>
+            <span class="text-white m-2">
+                Nie masz konta? Zarejestruj się
+                <a class="text-cyan-400" href="/accounts/register">tutaj</a>
+            </span>
+        </div>
+    </div>
+    <div class="col-span-2"></div>
+</div>
+{% endblock %}
