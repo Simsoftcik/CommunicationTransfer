@@ -9,43 +9,43 @@ def sort_hand(cards):
         def sort_key(card):
             value = i = 0
 
-            if card[0] == Height.TWO:
+            if card[0] == Height.TWO.value:
                 value = 0
-            elif card[0] == Height.THREE:
+            elif card[0] == Height.THREE.value:
                 value = 1
-            elif card[0] == Height.FOUR:
+            elif card[0] == Height.FOUR.value:
                 value = 2
-            elif card[0] == Height.FIVE:
+            elif card[0] == Height.FIVE.value:
                 value = 3
-            elif card[0] == Height.SIX:
+            elif card[0] == Height.SIX.value:
                 value = 4
-            elif card[0] == Height.SEVEN:
+            elif card[0] == Height.SEVEN.value:
                 value = 5
-            elif card[0] == Height.EIGHT:
+            elif card[0] == Height.EIGHT.value:
                 value = 6
-            elif card[0] == Height.NINE:
+            elif card[0] == Height.NINE.value:
                 value = 7
-            elif card[0] == Height.TEN:
+            elif card[0] == Height.TEN.value:
                 value = 8
-            elif card[0] == Height.JACK:
+            elif card[0] == Height.JACK.value:
                 value = 9
-            elif card[0] == Height.QUEEN:
+            elif card[0] == Height.QUEEN.value:
                 value = 10
-            elif card[0] == Height.KING:
+            elif card[0] == Height.KING.value:
                 value = 11
-            elif card[0] == Height.ACE:
+            elif card[0] == Height.ACE.value:
                 value = 12
             
         
-            if card[1] == Suit.CLUBS:
+            if card[1] == Suit.CLUBS.value:
                 i = 0
-            elif card[1] == Suit.DIAMONDS:
+            elif card[1] == Suit.DIAMONDS.value:
                 i = 1
-            elif card[1] == Suit.HEARTS:
+            elif card[1] == Suit.HEARTS.value:
                 i = 2
-            elif card[1] == Suit.SPADES:
+            elif card[1] == Suit.SPADES.value: 
                 i = 3        
-        
+
             return value + 13 * i
         
         return sorted(cards, key=sort_key, reverse=True)
@@ -82,7 +82,6 @@ class selected_post(DetailView):
             for suit in ['clubs', 'diamonds', 'hearts', 'spades']:
                 
                 field_name = f'{side}_{suit}'
-                print(field_name)
                 cards_model = getattr(post, field_name, None)
 
                 if cards_model != None:
@@ -103,16 +102,30 @@ class selected_post(DetailView):
                         elif suit == 'spades':
                             color = '♠'
                         cards[side].append((height, color))
-
+        
         for side in cards:
-            for j in range(13):
-                cards[side][j] = (j, cards[side][j])
+            
+            cards[side] = sort_hand(cards[side])
+
+        new_cards = {'n': [],'e': [],'s':[], 'w':[]}
+        
+
+        for i, card in enumerate(cards['n']):
+            new_cards['n'].append((i, card))
+
+        for i, card in enumerate(cards['s']):
+            new_cards['s'].append((i, card))
+
+        for i, card in enumerate(cards['e']):
+            new_cards['e'].append((i, card))
+
+        for i, card in enumerate(cards['w']):
+            new_cards['w'].append((i, card))
 
         # for side in cards:
         #     side = sort_hand(side)
 
-        context['cards'] = cards
-        print(cards)
+        context['cards'] = new_cards
         return context
 
     def post(self, request, *args, **kwargs):

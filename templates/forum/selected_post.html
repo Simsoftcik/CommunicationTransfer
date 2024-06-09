@@ -1,7 +1,7 @@
 <style>
     .post_bidding_containter {
-        width: 800px;
-        height: 800px;
+        width: 900px;
+        height: 900px;
         margin: auto;
         padding: 20px;
         display: grid;
@@ -45,7 +45,7 @@
 {% block title %}Selected post{% endblock%}
 {% block content %}
 
-<div class=" m-8 bg-slate-100 rounded-2xl dark:bg-slate-900 dark:border border-slate-700">
+<div class=" m-8 mb-0 bg-slate-100 rounded-2xl dark:bg-slate-900 dark:border border-slate-700">
     <div class="h-auto bg-slate-200 dark:bg-dark_slate_2 rounded-t-2xl pb-1 flex dark:border-b border-slate-700">
         <span class="text-4xl font-oxygen align-middle text-slate-700 dark:border-slate-400 text-slate-200 px-2 transition duration-500 ease-in-out hover:brightness-110 font-bold">{{ selected_post.name }}</span>
     </div>
@@ -272,7 +272,7 @@
                     {% if card_element.1.1 == '♣'%}
                         {% with text_color='#009933' %}    
 
-                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 156px; width: 98px; color: {{text_color}}; background-color: antiquewhite; left: 29px; bottom: calc(29px * {{ card_element.0 }} - 29px); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 156px; width: 98px; color: {{text_color}}; background-color: antiquewhite; right: 0; bottom: calc(29px * {{ card_element.0 }} - 29px); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
                                 <div class="p-1 text-sm font-bold text-center rounded-l-lg" style="width: 14%; height: 156px; ">
                                     {{card_element.1.0}}</br> {{card_element.1.1}} 
                                 </div>
@@ -287,7 +287,7 @@
                     {% if card_element.1.1 == '♦'%}
                         {% with text_color='#ff9900' %}    
 
-                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 156px; width: 98px; color: {{text_color}}; background-color: antiquewhite; left: 29px; bottom: calc(29px * {{ card_element.0 }} - 29px); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 156px; width: 98px; color: {{text_color}}; background-color: antiquewhite; right: 0; bottom: calc(29px * {{ card_element.0 }} - 29px); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
                                 <div class="p-1 text-sm font-bold text-center rounded-l-lg" style="width: 14%; height: 156px; ">
                                     {{card_element.1.0}}</br> {{card_element.1.1}} 
                                 </div>
@@ -317,7 +317,7 @@
                     {% if card_element.1.1 == '♠'%}
                         {% with text_color='#005ce6' %}    
 
-                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 156px; width: 98px; color: {{text_color}}; background-color: antiquewhite; right: -29px; bottom: calc(29px * {{ card_element.0 }} - 29px); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
+                            <div class="absolute flex rounded-lg border-slate-500 rotate-90" style="border-width: 1px; height: 156px; width: 98px; color: {{text_color}}; background-color: antiquewhite; right: 0; bottom: calc(29px * {{ card_element.0 }} - 29px); -webkit-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); -moz-box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1); box-shadow: 2px 2px 7px 0px rgba(66, 68, 90, 1);">
                                 <div class="p-1 text-sm font-bold text-center rounded-l-lg" style="width: 14%; height: 156px; ">
                                     {{card_element.1.0}}</br> {{card_element.1.1}} 
                                 </div>
@@ -334,22 +334,56 @@
             <div></div>
         </div>
     </div>
-    <div class="p-8 md:flex">
-        <form method="POST" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2"> 
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Post" class="text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32">
-        </form>
-        {% for comment in comments %}
-            <div>
-                {{ comment.user_id.username }}
-                {{ comment.date }}
-                {{ comment.content }}
+    <div class="flex mx-auto wi-4/5">
+        {% if post.image %}
+            <div class="my-auto mx-8" style="width: 25%;">
+                <img src="{{post.image.url}}" class="border-4 rounded-2xl border-slate-400"/>
             </div>
-        {% empty %}
-            <h2>Be first to comment this post</h2>
-        {% endfor %}
-        <div class="w-1/2"></div>
+        {% else %}
+            <div></div>
+        {% endif %}
+        <div class="p-8 mt-10 mx-auto border-4 rounded-2xl bg-slate-100 border-slate-400" style="width: 65%; min-height: 200px;">
+            <p style="text-align: justify; color: black; font-weight: 500;">
+                {{post.description}}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultrices nisl ipsum, maximus pretium odio finibus nec. Nulla sed metus iaculis, elementum mi a, blandit neque. Etiam justo nibh, scelerisque in iaculis non, tempus sed elit. Pellentesque pretium iaculis hendrerit. Morbi eu tristique diam. Curabitur vehicula rhoncus ante at sollicitudin. Maecenas sagittis orci ut condimentum placerat. Suspendisse ultrices lectus imperdiet nibh imperdiet finibus. Donec sodales orci sit amet purus facilisis faucibus. Sed egestas nisl tellus, a accumsan ex pretium eu.
+
+                Morbi id sollicitudin tellus. Phasellus ultrices, enim ut condimentum imperdiet, sapien ligula congue nisi, in malesuada felis nulla et tellus. Donec euismod pellentesque ultricies. Pellentesque efficitur libero in lacinia commodo. Vestibulum sit amet ipsum cursus massa porttitor hendrerit. Ut rutrum venenatis porta. Nulla imperdiet pellentesque felis, sit amet ultrices lorem semper id. Mauris vel metus id risus scelerisque tincidunt vitae a elit. Nullam a iaculis nulla. Vivamus porttitor venenatis tellus, non dapibus arcu ullamcorper ac. Sed vestibulum nulla a sem sagittis, eget varius est ornare. Etiam in dictum nisl. Phasellus porttitor ligula sed sagittis condimentum. Vestibulum non pretium sapien.
+            </p><br>
+            <i style="color:rgb(168, 166, 166);">USER</i>
+        </div>
+    </div>
+    <div class="p-8 mt-20 md:flex bg-slate-100">
+        
+        <div>
+            <div class="my-2 font-bold text-4xl font-oxygen border-b-4 border-slate-400">Comment section</div>
+            <div style="">
+                {% for comment in comments %}
+                    <div class="my-10 flex">
+                        <div class="pr-4 border-r-2 border-slate-300 mr-4" style="width: 10%;">
+                            <div style="background-image: ;"></div>                            
+                            <h1 class="">
+                                {{ comment.user_id.username }}
+                            </h1>
+                        </div>
+
+                        <!-- {{ comment.user_id.profile_pic}} -->
+                        <div style="width: 65%;">
+                            <i>{{ comment.date }}</i><br>
+                            <p style="text-align: justify;">{{ comment.content }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <h2>Be first to comment this post</h2>
+                {% endfor %}
+                <div >
+                    <form method="POST" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2" style="width: 80%;"> 
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Post" class="text-slate-800 bg-slate-300 hover:bg-slate-400 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:hover:text-slate-200 mx-2 h-fit text-sm 2xl:text-lg font-bold px-2 rounded-lg shadow-sm w-32" >
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -15,7 +15,7 @@ class Height(Enum):
     SEVEN ='7'
     EIGHT ='8'
     NINE ='9'
-    TEN ='T'
+    TEN ='10'
     JACK ='J'
     QUEEN ='Q'
     KING ='K'
