@@ -7,10 +7,6 @@
     {% csrf_token %}
     <h1 class="block text-gray-700 font-bold mb-2 text-4xl">Create new post</h1>
     <div class="mb-6">
-        <label for="username" class="block text-gray-700 font-bold mb-2">Username:</label>
-        {{ form.user_id.username }}
-    </div>
-    <div class="mb-6">
         <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
         {{ form.name }}
     </div>
