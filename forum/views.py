@@ -73,7 +73,7 @@ class selected_post(DetailView):
         context = super().get_context_data(**kwargs)
         context['selected_post'] = self.get_object()
         context['form'] = CommentForm
-        context['comments'] = Comment.objects.all()
+        context['comments'] = Comment.objects.filter(post_id=self.get_object())
         
         cards = {'n': [], 'e': [], 's': [], 'w': []}
         post = self.object

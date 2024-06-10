@@ -7,6 +7,11 @@
     <div class="h-auto bg-slate-200 dark:bg-dark_slate_2 rounded-t-2xl pb-1 flex dark:border-b border-slate-700">
         <span class="text-4xl font-oxygen align-middle text-slate-700 dark:border-slate-400 text-slate-200 px-2 transition duration-500 ease-in-out hover:brightness-110 font-bold">Create new category</span>
     </div>
+    <style>
+        input[type="text"], textarea {
+            color: black; 
+        }
+    </style>
     <div class="p-8 md:flex">
         <form method="POST" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2"> 
             {% csrf_token %}
