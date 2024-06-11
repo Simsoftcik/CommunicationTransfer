@@ -400,9 +400,10 @@
                 {% for comment in comments %}
                     <div class="my-10 flex">
                         <div class="pr-10 border-r-2 border-slate-300 mr-4" style="width: 10%;">     
-                            <img class="object-cover overflow-hidden rounded-full shadow-md h-auto w-64 aspect-square hover:scale-110 ease-in duration-100 ml-auto mr-auto" 
-                            src="{{ request.user.accounts.profile_pic.url }}" 
+                            <img class="object-cover overflow-hidden rounded-full shadow-md aspect-square hover:scale-110 ease-in duration-100 ml-auto mr-auto" 
+                            src="/media/profile_pics/default_profile_pic.jpg" 
                             alt="profile pic">                   
+                            <!-- NIE DZIALA LADOWANIE ZDJEC UZYTKOWNIKOW -->
                             <h1 class="font-bold text-center">
                                 {{ comment.user_id.username }}
                             </h1>

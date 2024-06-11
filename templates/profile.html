@@ -16,9 +16,15 @@
     </div>
     <div class="p-8 md:flex">
         <div class="border-0 md:border-r-4 flex-col w-fit p-8">
-            <img class="object-cover overflow-hidden rounded-full shadow-md h-auto w-64 aspect-square hover:scale-110 ease-in duration-100 ml-auto mr-auto" 
+            {% if request.user.accounts.profile_pic.url %}
+                <img class="object-cover overflow-hidden rounded-full shadow-md h-auto w-64 aspect-square hover:scale-110 ease-in duration-100 ml-auto mr-auto" 
                 src="{{ request.user.accounts.profile_pic.url }}" 
                 alt="profile pic">
+            {% else %}
+                <img class="object-cover overflow-hidden rounded-full shadow-md h-auto w-64 aspect-square hover:scale-110 ease-in duration-100 ml-auto mr-auto" 
+                src="/media/profile_pics/default_profile_pic.jpg" 
+                alt="profile pic">
+            {% endif %}
         </div>
         <form method="POST" action="" enctype="multipart/form-data" class="mx-4 w-fit grow flex flex-col gap-2"> 
             {% csrf_token %}
