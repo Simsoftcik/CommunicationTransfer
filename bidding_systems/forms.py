@@ -86,50 +86,91 @@ class BidSituationForm(ModelForm):
         }
 
 
+# class BidForm(ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         self.system_id = kwargs.pop('system_id', None)
+#         super().__init__(*args, **kwargs)
+
+#         if self.system_id is not None:
+#             categories = BidCategory.query_objects.filter(bid_system_id=self.system_id)
+#             situations = []
+#             for category in categories:
+                
+#                 situations.append(BidSituation.objects.get(bid_category_id=category))
+#             # situations = BidSituation.query_objects.filter(bid_category__in=categories)
+
+#             self.fields['Situation'] = forms.ModelChoiceField(
+#                 queryset=situations,
+#                 widget=forms.Select(attrs={'class': 'form-control'}),
+#                 label='Bid Situation',
+#                 # empty_label='Select a Bid Situation'  # Opcjonalna pusta etykieta
+#             )
+
+#             self.fields['Situation'].label_from_instance = lambda obj: f"{obj.name}"
+
+#     class Meta:
+#         model = Bid
+#         exclude = []
+#         widgets = {
+#             'name':TextInput(attrs={
+#                 'class':'',
+#                 'placeholder':'Situation...'
+#             }),
+#             'symbol':Select(attrs={
+#                 'class':'',
+#                 'placeholder':'Symbol'
+#             }),
+#             'forcing_type':Select(attrs={
+#                 'class':'',
+#                 'placeholder':'Forcing type'
+#             }),
+#             'strength':TextInput(attrs={
+#                 'class':'',
+#                 'placeholder':'Strength (optional)'
+#             }),
+#             'description':Textarea(attrs={
+#                 'class':'',
+#                 'placeholder':'Description...'
+#             })
+#         }
+
+
 class BidForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.system_id = kwargs.pop('system_id', None)
         super().__init__(*args, **kwargs)
 
-        if self.system_id is not None:
-            categories = BidCategory.query_objects.filter(bid_system_id=self.system_id)
-            situations = []
-            for category in categories:
-                print(category.name)
-                situations.append(BidSituation.objects.get(bid_category_id=category))
-            # situations = BidSituation.query_objects.filter(bid_category__in=categories)
+        # if self.system_id is not None:
+        #     categories = BidCategory.query_objects.filter(bid_system_id=self.system_id)
+        #     situations = BidSituation.objects.filter(bid_category_id__in=categories)
 
-            self.fields['Situation'] = forms.ModelChoiceField(
-                queryset=situations,
-                widget=forms.Select(attrs={'class': 'form-control'}),
-                label='Bid Situation',
-                # empty_label='Select a Bid Situation'  # Opcjonalna pusta etykieta
-            )
-
-            self.fields['Situation'].label_from_instance = lambda obj: f"{obj.name}"
+        #     self.fields['bid_situation_id'].queryset = situations
 
     class Meta:
         model = Bid
         exclude = []
         widgets = {
-            'name':TextInput(attrs={
-                'class':'',
-                'placeholder':'Situation...'
+            'name': TextInput(attrs={
+                'class': '',
+                'placeholder': 'Situation...'
             }),
-            'symbol':Select(attrs={
-                'class':'',
-                'placeholder':'Symbol'
+            'symbol': Select(attrs={
+                'class': '',
+                'placeholder': 'Symbol'
             }),
-            'forcing_type':Select(attrs={
-                'class':'',
-                'placeholder':'Forcing type'
+            'forcing_type': Select(attrs={
+                'class': '',
+                'placeholder': 'Forcing type'
             }),
-            'strength':TextInput(attrs={
-                'class':'',
-                'placeholder':'Strength (optional)'
+            'strength': TextInput(attrs={
+                'class': '',
+                'placeholder': 'Strength (optional)'
             }),
-            'description':Textarea(attrs={
-                'class':'',
-                'placeholder':'Description...'
+            'description': Textarea(attrs={
+                'class': '',
+                'placeholder': 'Description...'
             })
         }
+
+    def label_from_instance(self, obj):
+        return f"{obj.name}"
