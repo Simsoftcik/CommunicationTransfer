@@ -95,7 +95,8 @@ class BidForm(ModelForm):
             categories = BidCategory.query_objects.filter(bid_system_id=self.system_id)
             situations = []
             for category in categories:
-                situations.append(BidSituation.filter(bid_category_id=category))
+                print(category.name)
+                situations.append(BidSituation.objects.get(bid_category_id=category))
             # situations = BidSituation.query_objects.filter(bid_category__in=categories)
 
             self.fields['Situation'] = forms.ModelChoiceField(

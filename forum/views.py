@@ -126,6 +126,7 @@ class selected_post(DetailView):
         #     side = sort_hand(side)
 
         context['cards'] = new_cards
+
         return context
 
     def post(self, request, *args, **kwargs):
