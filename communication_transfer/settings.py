@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'main',
     'accounts',
     'bidding_systems',
-    'trening_arena',
+    'training_arena',
     'forum'
 ]
 

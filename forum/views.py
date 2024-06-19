@@ -6,49 +6,49 @@ from django.contrib.auth.decorators import login_required
 from forum.util.enums import *
 
 def sort_hand(cards):
-        def sort_key(card):
-            value = i = 0
-
-            if card[0] == Height.TWO.value:
+    def sort_key(card):
+        value = i = 0
+        match card[0]:
+            case Height.TWO.value:
                 value = 0
-            elif card[0] == Height.THREE.value:
+            case Height.THREE.value:
                 value = 1
-            elif card[0] == Height.FOUR.value:
+            case Height.FOUR.value:
                 value = 2
-            elif card[0] == Height.FIVE.value:
+            case Height.FIVE.value:
                 value = 3
-            elif card[0] == Height.SIX.value:
+            case Height.SIX.value:
                 value = 4
-            elif card[0] == Height.SEVEN.value:
+            case Height.SEVEN.value:
                 value = 5
-            elif card[0] == Height.EIGHT.value:
+            case Height.EIGHT.value:
                 value = 6
-            elif card[0] == Height.NINE.value:
+            case Height.NINE.value:
                 value = 7
-            elif card[0] == Height.TEN.value:
+            case Height.TEN.value:
                 value = 8
-            elif card[0] == Height.JACK.value:
+            case Height.JACK.value:
                 value = 9
-            elif card[0] == Height.QUEEN.value:
+            case Height.QUEEN.value:
                 value = 10
-            elif card[0] == Height.KING.value:
+            case Height.KING.value:
                 value = 11
-            elif card[0] == Height.ACE.value:
+            case Height.ACE.value:
                 value = 12
-            
         
-            if card[1] == Suit.CLUBS.value:
+        match card[1]:
+            case Suit.CLUBS.value:
                 i = 0
-            elif card[1] == Suit.DIAMONDS.value:
+            case Suit.DIAMONDS.value:
                 i = 1
-            elif card[1] == Suit.HEARTS.value:
+            case Suit.HEARTS.value:
                 i = 2
-            elif card[1] == Suit.SPADES.value: 
-                i = 3        
+            case Suit.SPADES.value: 
+                i = 3
 
-            return value + 13 * i
-        
-        return sorted(cards, key=sort_key, reverse=True)
+        return value + 13 * i
+    
+    return sorted(cards, key=sort_key, reverse=True)
 
 @login_required(login_url='login')
 def forum(request):
@@ -86,7 +86,6 @@ class selected_post(DetailView):
 
                 if cards_model != None:
                     color_length = min(len(cards_model), 13)
-
                     cards_model = cards_model[:color_length]
 
                     for height in cards_model:
@@ -104,28 +103,23 @@ class selected_post(DetailView):
                         cards[side].append((height, color))
         
         for side in cards:
-            
             cards[side] = sort_hand(cards[side])
 
-        new_cards = {'n': [],'e': [],'s':[], 'w':[]}
-        
+        sorted_cards = {'n': [],'e': [],'s':[], 'w':[]}
 
         for i, card in enumerate(cards['n']):
-            new_cards['n'].append((i, card))
+            sorted_cards['n'].append((i, card))
 
         for i, card in enumerate(cards['s']):
-            new_cards['s'].append((i, card))
+            sorted_cards['s'].append((i, card))
 
         for i, card in enumerate(cards['e']):
-            new_cards['e'].append((i, card))
+            sorted_cards['e'].append((i, card))
 
         for i, card in enumerate(cards['w']):
-            new_cards['w'].append((i, card))
+            sorted_cards['w'].append((i, card))
 
-        # for side in cards:
-        #     side = sort_hand(side)
-
-        context['cards'] = new_cards
+        context['cards'] = sorted_cards
 
         return context
 

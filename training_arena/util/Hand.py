@@ -1,4 +1,4 @@
-from trening_arena.util.enums import *
+from training_arena.util.enums import *
 from random import shuffle, choice
 import random
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from random import randrange
-from trening_arena.util.Hand import Hand
+from training_arena.util.Hand import Hand
 from .forms import WhatShouldOpen
 
 def opening_position(hand):

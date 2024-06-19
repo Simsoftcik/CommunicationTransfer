@@ -1,5 +1,5 @@
 from django import forms
-from trening_arena.util.enums import Bid
+from training_arena.util.enums import Bid
 
 class WhatShouldOpen(forms.Form):
     CHOICES = [(bid.value, bid.value) for bid in Bid]

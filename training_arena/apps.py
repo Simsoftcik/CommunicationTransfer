@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
-class TreningArenaConfig(AppConfig):
+class TrainingArenaConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'trening_arena'
+    name = 'training_arena'

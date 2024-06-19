@@ -25,7 +25,7 @@ urlpatterns = [
     path('systems/', include('bidding_systems.urls')),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include("django.contrib.auth.urls")),
-    path('arena/', include('trening_arena.urls')),
+    path('arena/', include('training_arena.urls')),
     path('forum/', include('forum.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
