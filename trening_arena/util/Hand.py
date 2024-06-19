@@ -275,50 +275,49 @@ class Hand():
     def sort_hand(self):
         def sort_key(card):
             value = i = 0
-
-            if card[0] == Height.TWO:
-                value = 0
-            elif card[0] == Height.THREE:
-                value = 1
-            elif card[0] == Height.FOUR:
-                value = 2
-            elif card[0] == Height.FIVE:
-                value = 3
-            elif card[0] == Height.SIX:
-                value = 4
-            elif card[0] == Height.SEVEN:
-                value = 5
-            elif card[0] == Height.EIGHT:
-                value = 6
-            elif card[0] == Height.NINE:
-                value = 7
-            elif card[0] == Height.TEN:
-                value = 8
-            elif card[0] == Height.JACK:
-                value = 9
-            elif card[0] == Height.QUEEN:
-                value = 10
-            elif card[0] == Height.KING:
-                value = 11
-            elif card[0] == Height.ACE:
-                value = 12
+            match card[0]:
+                case Height.TWO:
+                    value = 0
+                case Height.THREE:
+                    value = 1
+                case Height.FOUR:
+                    value = 2
+                case Height.FIVE:
+                    value = 3
+                case Height.SIX:
+                    value = 4
+                case Height.SEVEN:
+                    value = 5
+                case Height.EIGHT:
+                    value = 6
+                case Height.NINE:
+                    value = 7
+                case Height.TEN:
+                    value = 8
+                case Height.JACK:
+                    value = 9
+                case Height.QUEEN:
+                    value = 10
+                case Height.KING:
+                    value = 11
+                case Height.ACE:
+                    value = 12
             
-        
-            if card[1] == Suit.CLUBS:
-                i = 0
-            elif card[1] == Suit.DIAMONDS:
-                i = 1
-            elif card[1] == Suit.HEARTS:
-                i = 2
-            elif card[1] == Suit.SPADES:
-                i = 3        
+            match card[1]:
+                case Suit.CLUBS:
+                    i = 0
+                case Suit.DIAMONDS:
+                    i = 1
+                case Suit.HEARTS:
+                    i = 2
+                case Suit.SPADES:
+                    i = 3
         
             return value + 13 * i
         
         return sorted(self.hand, key=sort_key, reverse=True)
     
     def generate_vulnerability_colors(self):
-        
         colors = []
         users_position = ((self.hand_num + self.first_hand_num) % 4) + 1
         is_on_even = users_position % 2

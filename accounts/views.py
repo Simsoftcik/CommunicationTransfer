@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, Account
-from .models import *
+from .models import Accounts
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as logout_user

@@ -1,23 +1,16 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
-from .forms import *
 from django.shortcuts import render
-from .models import BidSystem
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from .models import BidCategory
-from django.shortcuts import get_object_or_404, redirect
-from django.views.decorators.http import require_POST
+from .forms import BidSystemForm, BidCategoryForm, BidSituationForm, BidForm
+from .models import BidSystem, BidCategory
 
-is_edited = True
 
 @login_required(login_url='login')
 def my_systems(request):
     user_id = request.user.id
-    bid_systems = BidSystem.query_objects.filter(user_id=user_id)
+    bid_systems = BidSystem.objects.filter(user_id=user_id)
     
-
     if request.method == 'POST':
         form = BidSystemForm(request.POST)
         if form.is_valid():
@@ -34,7 +27,6 @@ class selected_system(DetailView):
     template_name = 'bid_systems/selected_system.html'
     context_object_name = 'system'
 
-    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -75,12 +67,10 @@ class edit_system(DetailView):
 
 
     def get_context_data(self, **kwargs):
-        categories = BidCategory.query_objects.filter(bid_system_id=self.object)
+        categories = BidCategory.objects.filter(bid_system_id=self.object)
         context = super().get_context_data(**kwargs)
-        system_id = self.object
-        context = super().get_context_data(**kwargs)
-        context['category_form'] = BidCategoryForm(instance=self.object, system_id=system_id)
-        context['situation_form'] = BidSituationForm(instance=self.object, system_id=system_id)
+        context['category_form'] = BidCategoryForm(instance=self.object, system_id=self.object.id)
+        context['situation_form'] = BidSituationForm(instance=self.object, system_id=self.object.id)
         context['bid_form'] = BidForm(instance=self.object)
         context['categories'] = categories
         return context

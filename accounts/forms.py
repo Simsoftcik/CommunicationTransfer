@@ -1,4 +1,3 @@
-# from tkinter.tix import Select
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm, TextInput, PasswordInput, Select, Textarea, FileInput

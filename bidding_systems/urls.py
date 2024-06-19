@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from .views import my_systems, selected_system, edit_system
 
 urlpatterns = [
             path('my_systems/', my_systems), 

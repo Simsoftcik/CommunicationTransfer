@@ -1,11 +1,10 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
-import random
+from random import randrange
 from trening_arena.util.Hand import Hand
 from .forms import WhatShouldOpen
-from django.http import JsonResponse
 
-def opening_bidding(hand):
+def opening_position(hand):
     # dealer's position, 0 = E, 1 = S, 2 = W, 3 = N
     starting_position = hand.first_hand_num - 1
 
@@ -20,11 +19,8 @@ def opening_bidding(hand):
 
     return bidding
 
-# global
-# new_hand = Hand()
 
 def opening(request):
-    # hand_id = request.session.get('hand_id')
     hand_id = request.POST.get('hand_id') or request.GET.get('hand_id') or request.session.get('hand_id')
 
     title = 'Openings'
@@ -35,19 +31,12 @@ def opening(request):
         except Hand.DoesNotExist:
             new_hand = Hand(hand_id)
     else:
-        seed = random.randrange(100000)
+        seed = randrange(100000)
         new_hand = Hand(seed)
         request.session['hand_id'] = seed
 
-    bidding = opening_bidding(new_hand)
+    bidding = opening_position(new_hand)
     bidding.append('user')
-    # bidding.append('1♣')
-    # bidding.append('1♦')
-    # bidding.append('1♥')
-    # bidding.append('1♠')
-    # bidding.append('1NT')
-    # bidding.append('x')
-    # bidding.append('xx')
     cards = new_hand.sort_hand()
 
     for i, x in enumerate(cards):
@@ -93,7 +82,6 @@ def opening(request):
 
 
 def generate_new_hand_id(request):
-    new_seed = random.randrange(100000)
+    new_seed = randrange(100000)
     request.session['hand_id'] = new_seed
-    # return HttpResponseRedirect(reverse('opening'), {'hand_id': new_seed})
     return redirect(reverse('opening') + f'?hand_id={new_seed}')
