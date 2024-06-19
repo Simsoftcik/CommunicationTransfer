@@ -44,18 +44,22 @@ class BidSituationForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.system_id = kwargs.pop('system_id', None)
         super().__init__(*args, **kwargs)
+        # if self.system_id is not None:
+            # self.fields['bid_system_id'] = forms.ModelChoiceField(
+            #     queryset=BidSystem.query_objects.all(),
+            #     initial=self.system_id,
+            #     widget=forms.HiddenInput()
+            # )
+        if self.instance.pk:  # Check if instance exists (for editing)
+            self.fields['bid_system_id'].initial = self.instance.bid_system_id_id
+        
+        self.fields['bid_system_id'] = forms.ModelChoiceField(
+            queryset=BidSystem.query_objects.all(),
+            initial=self.system_id,
+            widget=forms.HiddenInput()
+        )
         
         categories = BidCategory.query_objects.filter(bid_system_id=self.system_id)
-        
-        # choices = [(category, category.name) for category in categories]
-        
-        # self.fields['bid_category_id'] = forms.ChoiceField(
-        #         queryset=categories, 
-        #         choices=choices, 
-        #         widget=forms.Select, 
-        #         required=True
-        #     )
-        # self.fields['bid_category_id'].queryset = categories
         
         self.fields['bid_category_id'] = forms.ModelChoiceField(
                 queryset=categories,
@@ -69,7 +73,7 @@ class BidSituationForm(ModelForm):
 
     class Meta:
         model = BidSituation
-        exclude = []  # Usuwamy wyłączenie, aby uwzględnić wszystkie pola z modelu BidSituation
+        exclude = ['bid_system_id'] 
         widgets = {
             'name': TextInput(attrs={
                 'class':'',
@@ -86,60 +90,24 @@ class BidSituationForm(ModelForm):
         }
 
 
-# class BidForm(ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         self.system_id = kwargs.pop('system_id', None)
-#         super().__init__(*args, **kwargs)
-
-#         if self.system_id is not None:
-#             categories = BidCategory.query_objects.filter(bid_system_id=self.system_id)
-#             situations = []
-#             for category in categories:
-                
-#                 situations.append(BidSituation.objects.get(bid_category_id=category))
-#             # situations = BidSituation.query_objects.filter(bid_category__in=categories)
-
-#             self.fields['Situation'] = forms.ModelChoiceField(
-#                 queryset=situations,
-#                 widget=forms.Select(attrs={'class': 'form-control'}),
-#                 label='Bid Situation',
-#                 # empty_label='Select a Bid Situation'  # Opcjonalna pusta etykieta
-#             )
-
-#             self.fields['Situation'].label_from_instance = lambda obj: f"{obj.name}"
-
-#     class Meta:
-#         model = Bid
-#         exclude = []
-#         widgets = {
-#             'name':TextInput(attrs={
-#                 'class':'',
-#                 'placeholder':'Situation...'
-#             }),
-#             'symbol':Select(attrs={
-#                 'class':'',
-#                 'placeholder':'Symbol'
-#             }),
-#             'forcing_type':Select(attrs={
-#                 'class':'',
-#                 'placeholder':'Forcing type'
-#             }),
-#             'strength':TextInput(attrs={
-#                 'class':'',
-#                 'placeholder':'Strength (optional)'
-#             }),
-#             'description':Textarea(attrs={
-#                 'class':'',
-#                 'placeholder':'Description...'
-#             })
-#         }
-
-
 class BidForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.system_id = kwargs.pop('system_id', None)
         super().__init__(*args, **kwargs)
+        if self.system_id is not None:
+            self.fields['bid_system_id'] = forms.ModelChoiceField(
+                queryset=BidSystem.query_objects.all(),
+                initial=self.system_id,
+                widget=forms.HiddenInput()
+            )
 
+        situations = BidSituation.query_objects.filter(bid_system_id=self.system_id)
+        self.fields['bid_situation_id'] = forms.ModelChoiceField(
+                queryset=situations,
+                widget=forms.Select(),  
+                label='Bid Situation',
+                # empty_label=None
+            )
         # if self.system_id is not None:
         #     categories = BidCategory.query_objects.filter(bid_system_id=self.system_id)
         #     situations = BidSituation.objects.filter(bid_category_id__in=categories)
@@ -148,7 +116,7 @@ class BidForm(ModelForm):
 
     class Meta:
         model = Bid
-        exclude = []
+        exclude = ['bid_system_id']
         widgets = {
             'name': TextInput(attrs={
                 'class': '',

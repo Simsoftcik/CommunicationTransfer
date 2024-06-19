@@ -67,41 +67,76 @@ class selected_system(DetailView):
 
         return context
 
+# class edit_system(DetailView):
+#     model = BidSystem
+#     template_name = 'bid_systems/edit_system.html'
+#     context_object_name = 'system'
+    
+
+
+#     def get_context_data(self, **kwargs):
+#         categories = BidCategory.query_objects.filter(bid_system_id=self.object)
+#         context = super().get_context_data(**kwargs)
+#         system_id = self.object
+#         context = super().get_context_data(**kwargs)
+#         context['category_form'] = BidCategoryForm(instance=self.object, system_id=system_id)
+#         context['situation_form'] = BidSituationForm(instance=self.object, system_id=system_id)
+#         context['bid_form'] = BidForm(instance=self.object)
+#         context['categories'] = categories
+#         return context
+
+#     def post(self, request, *args, **kwargs):
+
+#         self.object = self.get_object()
+
+#         category_form = BidCategoryForm(request.POST, system_id=self.object.id)
+#         if category_form.is_valid():
+#             category_form.save()
+
+#         situation_form = BidSituationForm(request.POST, system_id=self.object.id)
+#         if situation_form.is_valid():
+#             situation_form.save()
+
+#         bid_form = BidForm(request.POST, system_id=self.object.id)
+#         if bid_form.is_valid():
+#             bid_form.save()
+
+#         return render(request, self.template_name, self.get_context_data())
+
 class edit_system(DetailView):
     model = BidSystem
     template_name = 'bid_systems/edit_system.html'
     context_object_name = 'system'
-    
-
 
     def get_context_data(self, **kwargs):
-        categories = BidCategory.query_objects.filter(bid_system_id=self.object)
         context = super().get_context_data(**kwargs)
-        system_id = self.object
-        context = super().get_context_data(**kwargs)
-        context['category_form'] = BidCategoryForm(instance=self.object, system_id=system_id)
-        context['situation_form'] = BidSituationForm(instance=self.object, system_id=system_id)
-        context['bid_form'] = BidForm(instance=self.object)
+        system = self.get_object()
+        categories = BidCategory.query_objects.filter(bid_system_id=system)
+
+        context['category_form'] = BidCategoryForm(system_id=system.id)
+        context['situation_form'] = BidSituationForm(system_id=system.id)
+        context['bid_form'] = BidForm(system_id=system.id)
         context['categories'] = categories
+
         return context
 
     def post(self, request, *args, **kwargs):
-
         self.object = self.get_object()
+        system_id = self.object.id
 
-        category_form = BidCategoryForm(request.POST, system_id=self.object.id)
+        category_form = BidCategoryForm(request.POST, system_id=system_id)
+        situation_form = BidSituationForm(request.POST, system_id=system_id)
+        bid_form = BidForm(request.POST, system_id=system_id)
+
         if category_form.is_valid():
             category_form.save()
 
-        situation_form = BidSituationForm(request.POST, system_id=self.object.id)
         if situation_form.is_valid():
             situation_form.save()
 
-        bid_form = BidForm(request.POST, system_id=self.object.id)
         if bid_form.is_valid():
             bid_form.save()
 
-        return render(request, self.template_name, self.get_context_data())
-
+        return redirect('edit_system', pk=system_id)
 
 
