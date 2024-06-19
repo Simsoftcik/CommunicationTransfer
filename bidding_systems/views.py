@@ -83,23 +83,32 @@ class edit_system(DetailView):
         context['situation_form'] = BidSituationForm(instance=self.object, system_id=system_id)
         context['bid_form'] = BidForm(instance=self.object)
         context['categories'] = categories
+        context['category_form'] = BidCategoryForm(initial={'system_id': self.object.id})
+        context['situation_form'] = BidSituationForm(initial={'system_id': self.object.id})
+        context['bid_form'] = BidForm(initial={'system_id': self.object.id})
+
         return context
 
     def post(self, request, *args, **kwargs):
-
         self.object = self.get_object()
 
         category_form = BidCategoryForm(request.POST, system_id=self.object.id)
         if category_form.is_valid():
-            category_form.save()
+            category = category_form.save(commit=False)
+            category.bid_system = self.object  
+            category.save()
 
         situation_form = BidSituationForm(request.POST, system_id=self.object.id)
         if situation_form.is_valid():
-            situation_form.save()
+            situation = situation_form.save(commit=False)
+            situation.bid_category.bid_system = self.object  
+            situation.save()
 
         bid_form = BidForm(request.POST, system_id=self.object.id)
         if bid_form.is_valid():
-            bid_form.save()
+            bid = bid_form.save(commit=False)
+            bid.situation.bid_category.bid_system = self.object  
+            bid.save()
 
         return render(request, self.template_name, self.get_context_data())
 

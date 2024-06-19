@@ -44,18 +44,9 @@ class BidSituationForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.system_id = kwargs.pop('system_id', None)
         super().__init__(*args, **kwargs)
-        
+        if self.system_id:
+            self.fields['bid_system_id'].queryset = BidSystem.query_objects.filter(id=self.system_id)
         categories = BidCategory.query_objects.filter(bid_system_id=self.system_id)
-        
-        # choices = [(category, category.name) for category in categories]
-        
-        # self.fields['bid_category_id'] = forms.ChoiceField(
-        #         queryset=categories, 
-        #         choices=choices, 
-        #         widget=forms.Select, 
-        #         required=True
-        #     )
-        # self.fields['bid_category_id'].queryset = categories
         
         self.fields['bid_category_id'] = forms.ModelChoiceField(
                 queryset=categories,
@@ -139,6 +130,20 @@ class BidForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.system_id = kwargs.pop('system_id', None)
         super().__init__(*args, **kwargs)
+        if self.system_id:
+            self.fields['system'].queryset = BidSystem.query_objects.filter(id=self.system_id)
+        bid_system = BidSystem.query_objects.get(pk=self.system_id)
+        categories = bid_system.bidcategory_set.all()  # Pobierz wszystkie kategorie dla tego BidSystem
+        situations = BidSituation.query_objects.filter(bid_category_id__in=categories)
+        
+        self.fields['bid_category_id'] = forms.ModelChoiceField(
+                queryset=situations,
+                widget=forms.Select(),  
+                label='Bid Situation',
+                # empty_label=None
+            )
+
+        self.fields['bid_situation_id'].label_from_instance = lambda obj: f"{obj.name}" 
 
         # if self.system_id is not None:
         #     categories = BidCategory.query_objects.filter(bid_system_id=self.system_id)

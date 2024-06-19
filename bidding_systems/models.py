@@ -20,6 +20,7 @@ class BidCategory(models.Model):
     query_objects = CustomBidCategoryManager()
 
 class BidSituation(models.Model):
+    bid_system_id = models.ForeignKey(BidSystem, on_delete=models.CASCADE)
     bid_category_id = models.ForeignKey(BidCategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, default='')
     sequences = models.CharField(max_length=100)
@@ -27,6 +28,7 @@ class BidSituation(models.Model):
     query_objects = CustomBidCategoryManager()
 
 class Bid(models.Model):
+    bid_system_id = models.ForeignKey(BidSystem, on_delete=models.CASCADE)
     bid_situation_id = models.ForeignKey(BidSituation, on_delete=models.CASCADE)
     symbol = models.CharField(max_length=4, choices=symbols)
     name = models.CharField(blank=True, max_length=100, default='')    
